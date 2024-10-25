@@ -1,0 +1,15 @@
+# Copyright holder
+copyright: 2024 EUMETSAT/RBINS
+license: LICENSE.txt
+
+# List of development authors
+Ben Loveday (Innoflair UG)
+Hayley Evers-King (EUMETSAT)
+Kevin Ruddick (RBINS)
+
+# List of contributory authors
+Christian Hill
+Stewart Bernard
+
+# Support
+For all queries on this software package, please contact ops@eumetsat.int
