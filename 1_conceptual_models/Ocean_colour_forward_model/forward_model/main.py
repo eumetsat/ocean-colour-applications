@@ -164,7 +164,7 @@ class ForwardModel(widgets.HBox):
             cdom_val)
 
         self.line1a.set_ydata([np.log10(chl_val), np.log10(nap_val), np.log10(cdom_val)])
-        self.line1b.set_ydata(np.log10(TSM))
+        self.line1b.set_ydata([np.log10(TSM)])
 
         self.line2a.set_ydata(components["rrs"])
 
@@ -190,7 +190,7 @@ class ForwardModel(widgets.HBox):
                     color=self.sample_plot_colours[ii], linestyle='--')
         else:
             for item in self.rrs_samples:
-                item.set_ydata(None)
+                item.set_ydata([None])
 
     def show_user_plots(self, change):
         if change.new:
@@ -229,4 +229,4 @@ class ForwardModel(widgets.HBox):
                                  color='0.5', linestyle='--')
         else:
             for item in self.saved_samples:
-                item.set_ydata(None)
+                item.set_ydata([None])

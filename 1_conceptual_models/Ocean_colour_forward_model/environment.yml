@@ -1,0 +1,13 @@
+# copyright: 2024 European Union
+# license: LICENSE.txt
+name: cmts_ocean_colour_forward_model
+channels:
+  - conda-forge
+dependencies:
+  # Core
+  - conda-forge::ipywidgets
+  - conda-forge::jupyterlab
+  - conda-forge::matplotlib
+  - conda-forge::python=3.10
+  # Extension
+  - conda-forge::ipympl
