@@ -3,7 +3,7 @@
 name: cmts_ocean_colour_applications
 channels:
   - conda-forge
-  - cmts
+#  - cmts
   - eumetsat
 dependencies:
   # Core
@@ -21,7 +21,7 @@ dependencies:
   - conda-forge::scipy
   - conda-forge::xarray
   # External
-  - cmts::eumartools
+#  - cmts::eumartools
   - eumetsat::eumdac
   # Extension
   - conda-forge::ipympl
