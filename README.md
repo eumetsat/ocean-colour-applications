@@ -95,7 +95,7 @@ operating system. Anaconda Python distributions include Jupyter Notebook.
 
 The following components are included in this SW package:
 
-Ocean colour forward model, 1.0, RBINS/EUMETSAT, (MIT), reused SW without modifications, see ./1_conceptual_models/Ocean_colour_forward_model/README file for more details
+Ocean colour forward model, 1.0, RBINS/EUMETSAT, (MIT), reused SW without modifications, see [./1_conceptual_models/Ocean_colour_forward_model/README.md](https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-colour-applications/-/blob/main/1_conceptual_models/Ocean_colour_forward_model/README.md?ref_type=heads) file for more details
 
 ## Installation
 
