@@ -34,7 +34,7 @@ dependencies:
   - conda-forge::seaborn
 #  - conda-forge::shapely
   - conda-forge::spectral  
-  - conda-forge::tensorflow
-  - conda-forge::tensorflow-probability
+#  - conda-forge::tensorflow
+#  - conda-forge::tensorflow-probability
   - conda-forge::tqdm
   - conda-forge::xmltodict
