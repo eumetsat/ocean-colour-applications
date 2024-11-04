@@ -7,4 +7,7 @@
 
 # List of contributory authors
 Christian Hill
-Stewart Bernard
+Stewart Bernard (CSIR)
+Lauren Biermann (Plymouth University)
+Nima Pahlevan (NASA)
+Brandon Smith (NASA)
