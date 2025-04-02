@@ -3,11 +3,12 @@ copyright: 2024 European Union
 license: LICENSE.txt
 
 # List of development authors
-Ben Loveday (Innoflair UG)
+Ben Loveday (Innoflair UG / EUMETSAT)
 Hayley Evers-King (EUMETSAT)
 Aida Alvera-Azcárate (GHER)
 Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
 Kevin Ruddick (RBINS)
+Anna-Lena Eerdmann (EUMETSAT)
 
 # List of contributory authors
 Christian Hill

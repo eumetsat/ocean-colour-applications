@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python%203.10-anaconda-green)](https://www.anaconda.com/products/distribution)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.txt)
 [![EUMETLAB](https://img.shields.io/badge/open-EUMETLAB-E67E22.svg)](https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-colour-applications)
-[![USER PORTAL](https://img.shields.io/badge/open-USER%20PORTAL-154360.svg)](https://user.eumetsat.int/search-view?sort=startDate%20desc&facets=%7B%22contentTypes%22:%5B%22Resources%7CCase%20studies%22%5D,%22theme%22:%5B%22Marine%22,%22Marine%7CMaritime%20safety%22,%22Marine%7COcean%20biogeochemistry%22,%22Marine%7COcean%20dynamics%22,%22Marine%7CWater%20quality%22%5D%7D)
+[![USER PORTAL](https://img.shields.io/badge/open-USER%20PORTAL-154360.svg)](https://user.eumetsat.int/data/themes/marine)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/git/https%3A%2F%2Fgitlab.eumetsat.int%2Feumetlab%2Foceans%2Focean-training%2Fapplications%2Focean-colour-applications/HEAD?labpath=Index.ipynb)
 [![WEkEO](https://img.shields.io/badge/launch-WEKEO-1a4696.svg)](https://jupyterhub.prod.wekeo2.eu/hub/user-redirect/lab/tree/public/wekeo4oceans/ocean-colour-applications/Index.ipynb)
 [![DestinE](https://img.shields.io/badge/launch-DestinE-f43fd3.svg)](https://code.insula.destine.eu/hub/)
@@ -190,7 +190,7 @@ This should open Jupyter Lab in a browser window. On occasion, Jupyter may not
 be able to open a window and will give you a URL to past in your browser. Please do
 so, if required.
 
-*Note: Jupyter Lab is not able to find antyhing that is 'above' it in a directory 
+*Note: Jupyter Lab is not able to find anything that is 'above' it in a directory 
 tree, and you will unable to navigate to these. So make sure you run the line above 
 from the correct directory!*
 
@@ -198,21 +198,51 @@ Now you can run the notebooks! We recommend you start with the [Index](./Index.i
 
 ### Running on cloud platforms
 
-If you are running on a remote Jupyter Hub (e.g. WEkEO or Insula) you will need to perform some additional steps to 
+If you are running on a remote Jupyter Hub (e.g. WEkEO or Insula Code) you will need to perform some additional steps to 
 ensure that you have the right python environment loaded in your notebook. When running locally, as long you have activated 
 the correct environment, Jupyter will load it into your the "kernel" which runs your code by default. On cloud systems, we 
-have to add the kernel to the system and apply it manually when we run.
+have to add the kernel to the system and apply it manually when we run. Below are the steps you need to run on WEkEO or the 
+DestinE Insula Code platforms to configure this repository and run these notebooks;
 
-To add an environment to a kernel you should first build the environment and activate it as described above. Once you have 
-done this, you can add your environment to a kernel from the command line as follows:
+1. Open JupyterHub: You will need a WEkEO or InsulaCode account to open their respective Jupyter Hubs. You can use the buttons at the top of this README to access the systems. For WEkEO you should choose the "Earth Observation Tools" server.
 
-`python -m ipykernel install --name cmts_ocean_colour_applications --user`
+2. Open a terminal (you can use the + icon on the left hand side of the menu bar to do this)
 
-You should now be able to select the kernel from the menu bar in the top right hand side of any notebook you run.
+3. If you are running on WEkEO, access the "work" directory by typing (you can skip this if running on DestinE);
+
+`cd ~/work`
+
+4. Clone the code base to the system using
+
+`git clone --recurse-submodules --remote-submodules https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-colour-applications.git`
+
+5. Enter the repository directory using
+
+`cd ocean-colour-applications`
+
+6. create the python environment using
+
+`conda env create -f environment.yml --solver=libmamba -y`
+
+7. initialise the conda environment with
+
+`conda init zsh; source ~/.zshrc`
+
+8. activate the environment with
+
+`conda activate cmts_ocean_colour_applications`
+
+9. add a kernel to your system with
+
+`ipython kernel install --name cmts_ocean_colour_applications --user`
+
+10. make some minor fixes
+
+`conda remove --force pyproj -y; pip install pyproj`
+
+11. You should now be able to select the kernel from the menu bar in the top right hand side of any notebook you run.
 
 *Note: it sometimes takes a few seconds for the kernel to register in the notebook itself*
-
-*Note: the above does not apply to Binder, which will load the environment supplied with the Git repository*
 
 ### Collaborating, contributing and issues
 

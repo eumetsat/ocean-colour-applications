@@ -4,6 +4,7 @@
 * Aida Alvera-Azcárate (GHER)
 * Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
 * Kevin Ruddick (RBINS)
+* Anna-Lena Eerdmann (EUMETSAT)
 
 # List of contributory authors
 Christian Hill
