@@ -5,6 +5,7 @@
 * Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
 * Kevin Ruddick (RBINS)
 * Anna-Lena Eerdmann (EUMETSAT)
+* Juan Ignacio-Gossn (EUMETSAT)
 
 # List of contributory authors
 Christian Hill

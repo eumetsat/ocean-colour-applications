@@ -29,8 +29,11 @@ wheels/
 *.nc
 *.zip
 *.jp2
+*.SEN3
 
 # OSx junk
 *DS_Store*
 
 # Repo specific
+**ThoMaS**
+**Cruise**

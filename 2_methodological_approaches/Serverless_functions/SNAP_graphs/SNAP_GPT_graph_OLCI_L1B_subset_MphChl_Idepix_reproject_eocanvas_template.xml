@@ -1,0 +1,98 @@
+<graph id="Graph">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>$img1</file>
+      <copyMetadata>true</copyMetadata>
+    </parameters>
+  </node>
+ 
+<!--
+    Notice here that we have commented out our "Subset" node! 
+    We will add a new one using eocanvas.
+    It will appear at the bottom of this Graph
+-->
+
+<!--
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <geoRegion>POLYGON((17 55.0,20.0 55.0,20.0 60.0,17 60.0,17 55.0))</geoRegion>
+      <sourceBands/>
+    </parameters>
+  </node>
+-->
+
+  <node id="Idepix">
+    <operator>Idepix.Olci</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <computeCloudBuffer>true</computeCloudBuffer>
+      <cloudBufferWidth>2</cloudBufferWidth>
+    </parameters>
+  </node>
+
+  <node id="MphChl">
+    <operator>MphChl</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters>
+      <cyanoMaxValue>1000</cyanoMaxValue>
+      <chlThreshForFloatFlag>500</chlThreshForFloatFlag>
+    </parameters>
+  </node>
+
+  <node id="Merge">
+    <operator>Merge</operator>
+    <sources>
+      <masterProduct>MphChl</masterProduct>
+      <sourceProducts>Idepix</sourceProducts>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement"/>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources>
+      <sourceProduct refid="MphChl"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <wktFile/>
+      <crs>GEOGCS[&quot;WGS84(DD)&quot;, 
+  DATUM[&quot;WGS84&quot;, 
+    SPHEROID[&quot;WGS84&quot;, 6378137.0, 298.257223563]], 
+  PRIMEM[&quot;Greenwich&quot;, 0.0], 
+  UNIT[&quot;degree&quot;, 0.017453292519943295], 
+  AXIS[&quot;Geodetic longitude&quot;, EAST], 
+  AXIS[&quot;Geodetic latitude&quot;, NORTH]]</crs>
+      <resampling>Nearest</resampling>
+      <orthorectify>false</orthorectify>
+      <elevationModelName/>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Reproject"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$output</file>
+      <formatName>ZNAP</formatName>
+    </parameters>
+  </node>
+
+</graph>

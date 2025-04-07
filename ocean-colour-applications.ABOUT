@@ -1,9 +1,9 @@
 # Component information
 name: ocean-colour-applications
 description: Compendium of training content associated with concepts, models and methodological approaches for working with ocean colour products from Earth observation.
-copyright: 2024 European Union
+copyright: 2025 European Union
 license_spdx: MIT
-date: 01-06-2024
+date: 01-04-2025
 home_url: https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-colour-applications
 
 # Package IPR documentation
@@ -30,6 +30,10 @@ about_resource: ./2_methodological_approaches/ML/S2_3_MDN/support_functions.py
 about_resource: ./2_methodological_approaches/ML/S2_3_MDN/Using_MDN_to_combine_S3_S3_chl_retrievals_in_coastal_waters.ipynb
 about_resource: ./2_methodological_approaches/ML/NN_C2RCC/Using_ML_to_retrieve_water_quality_indicators_in_coastal_waters.ipynb
 about_resource: ./2_methodological_approaches/ML/common_functions.py
+about_resource: ./2_methodological_approaches/Insitu_comparison/Ocean_colour_validation_cruise_tracks.ipynb
+about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/ESA_OTC_2025_cruise_track.geojson
+about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/PS113_HPLC_pigments_PFTs_QCle30.tab
+about_resource: ./2_methodological_approaches/Insitu_comparison/templates/OCDB_template.sb
 about_resource: ./img/S3_spectral_1200.png
 about_resource: ./img/4Fa_partition.png
 about_resource: ./img/S2_spectral_1200.png
@@ -40,6 +44,7 @@ about_resource: ./img/copernicus_logo.png
 about_resource: ./img/S2_spatial_resolution.png
 about_resource: ./img/SNAP_GUI_C2RCC.png
 about_resource: ./img/thumbs/ocean-colour-applications-default-thumb.png
+about_resource: ./img/thumbsOcean_colour_validation_cruise_tracks_thumb.png
 about_resource: AUTHORS.txt
 about_resource: Index.ipynb
 about_resource: LICENSE.txt

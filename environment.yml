@@ -1,4 +1,4 @@
-# copyright: 2024 European Union
+# copyright: 2025 European Union
 # license: LICENSE.txt
 name: cmts_ocean_colour_applications
 channels:
@@ -9,13 +9,16 @@ dependencies:
   - conda-forge::ipywidgets
   - conda-forge::jupyterlab
   - conda-forge::matplotlib
+  - conda-forge::xarray
+  - conda-forge::cartopy
+  - conda-forge::scipy
+  - conda-forge::netcdf4
   # External
-
+  - eumetsat::eumdac
   # Extension
+  - conda-forge::beautifulsoup4
+  - conda-forge::cdsapi
+  - conda-forge::ephem
+  - conda-forge::pandas
+  - conda-forge::urllib3
   - conda-forge::ipympl
-  - conda-forge::xcube=1.5
-  - conda-forge::copernicusmarine
-  - pip
-  - pip:
-    - eocanvas
-
