@@ -1,0 +1,108 @@
+<graph id="Graph">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>$img1</file>
+      <copyMetadata>true</copyMetadata>
+    </parameters>
+  </node>
+ 
+<!--
+    Notice here that we have commented out our "Subset" node! 
+    We will add a new one using eocanvas.
+    It will appear at the bottom of this Graph
+-->
+
+<!--
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <geoRegion>POLYGON((17 55.0,20.0 55.0,20.0 60.0,17 60.0,17 55.0))</geoRegion>
+      <sourceBands/>
+    </parameters>
+  </node>
+-->
+
+  <node id="MphChl">
+    <operator>MphChl</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters>
+      <cyanoMaxValue>1000</cyanoMaxValue>
+      <chlThreshForFloatFlag>500</chlThreshForFloatFlag>
+    </parameters>
+  </node>
+
+  <node id="BandMathsMPH">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="MphChl"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Filtered_CHL_MPH</name>
+          <type>float32</type>
+          <expression>if quality_flags_land or quality_flags_bright or quality_flags_invalid or quality_flags_cosmetic or quality_flags_duplicated or quality_flags_sun_glint_risk or quality_flags_dubious then NaN else chl</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0.0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+
+  <node id="Merge">
+    <operator>Merge</operator>
+    <sources>
+      <masterProduct>MphChl</masterProduct>
+      <sourceProducts>BandMathsMPH</sourceProducts>
+    </sources>
+    <parameters>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources>
+      <sourceProduct refid="Merge"/>
+    </sources>
+    <parameters>
+      <wktFile/>
+      <crs>GEOGCS[&quot;WGS84(DD)&quot;, 
+  DATUM[&quot;WGS84&quot;, 
+    SPHEROID[&quot;WGS84&quot;, 6378137.0, 298.257223563]], 
+  PRIMEM[&quot;Greenwich&quot;, 0.0], 
+  UNIT[&quot;degree&quot;, 0.017453292519943295], 
+  AXIS[&quot;Geodetic longitude&quot;, EAST], 
+  AXIS[&quot;Geodetic latitude&quot;, NORTH]]</crs>
+      <resampling>Nearest</resampling>
+      <orthorectify>false</orthorectify>
+      <elevationModelName/>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Reproject"/>
+    </sources>
+    <parameters>
+      <file>$output</file>
+      <formatName>netCDF4-BEAM</formatName>
+    </parameters>
+  </node>
+
+</graph>

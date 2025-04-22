@@ -17,8 +17,16 @@ dependencies:
   - eumetsat::eumdac
   # Extension
   - conda-forge::beautifulsoup4
+  - conda-forge::copernicusmarine=1.3
   - conda-forge::cdsapi
   - conda-forge::ephem
   - conda-forge::pandas
   - conda-forge::urllib3
   - conda-forge::ipympl
+  - conda-forge::zarr
+  - conda-forge::dask
+  - conda-forge::xcube=1.5
+  - pip
+  - pip:
+    - eocanvas
+    - hda

@@ -4,7 +4,7 @@
 * Aida Alvera-Azcárate (GHER)
 * Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
 * Kevin Ruddick (RBINS)
-* Anna-Lena Eerdmann (EUMETSAT)
+* Anna-Lena Erdmann (EUMETSAT)
 * Juan Ignacio-Gossn (EUMETSAT)
 
 # List of contributory authors

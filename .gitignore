@@ -30,6 +30,7 @@ wheels/
 *.zip
 *.jp2
 *.SEN3
+*.zarr
 
 # OSx junk
 *DS_Store*
@@ -37,3 +38,4 @@ wheels/
 # Repo specific
 /2_methodological_approaches/Insitu_comparison/ThoMaS
 /2_methodological_approaches/Insitu_comparison/Cruise
+/2_methodological_approaches/eocanvas/OLCI_L2_CHL_cube.zarr

@@ -34,6 +34,9 @@ about_resource: ./2_methodological_approaches/Insitu_comparison/Ocean_colour_val
 about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/ESA_OTC_2025_cruise_track.geojson
 about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/PS113_HPLC_pigments_PFTs_QCle30.tab
 about_resource: ./2_methodological_approaches/Insitu_comparison/templates/OCDB_template.sb
+about_resource: ./2_methodological_approaches/eocanvas/Multi_sensor_CHL_comparison_WEkEO.ipynb
+about_resource: ./2_methodological_approaches/eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L1B_subset_MphChl_reproject_eocanvas_template.xml
+about_resource: ./2_methodological_approaches/eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L2_subset_flag_reproject_chl_eocanvas_template.xml
 about_resource: ./img/S3_spectral_1200.png
 about_resource: ./img/4Fa_partition.png
 about_resource: ./img/S2_spectral_1200.png
