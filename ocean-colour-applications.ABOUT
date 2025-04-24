@@ -47,7 +47,9 @@ about_resource: ./img/copernicus_logo.png
 about_resource: ./img/S2_spatial_resolution.png
 about_resource: ./img/SNAP_GUI_C2RCC.png
 about_resource: ./img/thumbs/ocean-colour-applications-default-thumb.png
-about_resource: ./img/thumbsOcean_colour_validation_cruise_tracks_thumb.png
+about_resource: ./img/thumbs/Ocean_colour_validation_cruise_tracks_thumb.png
+about_resource: ./img/thumbs/Multi_sensor_CHL_comparison_WEkEO_thumb.png
+
 about_resource: AUTHORS.txt
 about_resource: Index.ipynb
 about_resource: LICENSE.txt

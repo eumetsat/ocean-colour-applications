@@ -28,5 +28,5 @@ dependencies:
   - conda-forge::xcube=1.5
   - pip
   - pip:
-    - eocanvas
+#    - eocanvas
     - hda
