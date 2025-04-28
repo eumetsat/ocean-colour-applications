@@ -13,6 +13,9 @@ dependencies:
   - conda-forge::cartopy
   - conda-forge::scipy
   - conda-forge::netcdf4
+  - conda-forge::zarr
+  - conda-forge::dask
+  - conda-forge::pandas
   # External
   - eumetsat::eumdac
   # Extension
@@ -20,13 +23,20 @@ dependencies:
   - conda-forge::copernicusmarine=1.3
   - conda-forge::cdsapi
   - conda-forge::ephem
-  - conda-forge::pandas
-  - conda-forge::urllib3
+  - conda-forge::urllib3  # < target to remove (replicate with requests?)
   - conda-forge::ipympl
-  - conda-forge::zarr
-  - conda-forge::dask
   - conda-forge::xcube=1.5
+  - conda-forge::seaborn  # < target to remove
+  - conda-forge::spectral  # < target to remove
+  - conda-forge::scikit-image
+  - conda-forge::scikit-learn
+  - conda-forge::rasterio  # < target to remove
+  - conda-forge::rioxarray  # < target to remove
+  - conda-forge::xmltodict  # < target to remove
+  - conda-forge::tf-keras  
+  - conda-forge::tensorflow
+  - conda-forge::tensorflow-probability
   - pip
   - pip:
-#    - eocanvas
+    - eocanvas
     - hda
