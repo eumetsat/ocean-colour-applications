@@ -42,10 +42,11 @@ class ForwardModel(widgets.HBox):
         self.conditions["sample_files"], self.conditions["rrs_samples"] = read_rrs_samples(self.conditions["params"])
         self.conditions["saved_samples"] = self.conditions["wavelengths"]*0.0
         self.conditions["user_files"], self.conditions["user_samples"] = read_rrs_user(self.conditions["params"])
+        self.conditions["adhoc_files"], self.conditions["adhoc_samples"] = read_rrs_adhoc(self.conditions["params"])
         self.conditions["chl_default"] = 1
         self.conditions["nap_default"] = 1
         self.conditions["cdom_default"] = 1
-
+        
         # set colours for sample spectra
         cmf_wavs = np.loadtxt(os.path.join(os.getcwd(), 'forward_model', 'cie-cmf.txt'), usecols=(0))
         self.sample_plot_colours = []
@@ -82,7 +83,7 @@ class ForwardModel(widgets.HBox):
 
         # define widgets
         chl_slider, nap_slider, cdom_slider, rrs_samples, user_samples, \
-            saved_samples, save_spectra_button, options_fQ, options_two_species = build_widgets(self)
+            saved_samples, adhoc_samples, save_spectra_button, options_fQ, options_two_species = build_widgets(self)
 
         # functionality for the save spectra button
         save_spectra_button.on_click(self.save_spectra)
@@ -96,7 +97,8 @@ class ForwardModel(widgets.HBox):
             rrs_samples,
             user_samples,
             save_spectra_button,
-            saved_samples
+            saved_samples,
+            adhoc_samples
         ])
 
         self.spectral_plots = widgets.VBox([self.output_spectral_rrs,
@@ -125,6 +127,9 @@ class ForwardModel(widgets.HBox):
         # show saved spectra
         saved_samples.observe(self.show_saved_plots, 'value')
 
+        # show adhoc spectra
+        adhoc_samples.observe(self.show_adhoc_plots, 'value')
+        
     def save_spectra(self, arg):
         """Define saved spectra"""
 
@@ -180,7 +185,6 @@ class ForwardModel(widgets.HBox):
         self.line4d.set_ydata(np.log10(components["bbpNAP"]))
 
     def show_sample_plots(self, change):
-
         if change.new:
             self.rrs_samples = [None] * np.shape(self.conditions["rrs_samples"])[0]
             for ii in range(np.shape(self.conditions["rrs_samples"])[0]):
@@ -221,8 +225,19 @@ class ForwardModel(widgets.HBox):
             for item in self.user_samples:
                 item.set_visible(False)
 
-    def show_saved_plots(self, change):
+    def show_adhoc_plots(self, change):
+        self.adhoc_samples = None
+        if change.new:
+            self.user_samples = [None] * np.shape(self.conditions["adhoc_samples"])[0]
+            for ii in range(np.shape(self.conditions["adhoc_samples"])[0]):
+                self.adhoc_samples = self.ax_rrs.plot(self.conditions["adhoc_samples"][ii,:,0], self.conditions["adhoc_samples"][ii,:,1],
+                                     color='m')
+        else:
+            if self.adhoc_samples:
+                for item in self.adhoc_samples:
+                    item.set_visible(False)
 
+    def show_saved_plots(self, change):
         if change.new:
             self.saved_samples = np.shape(self.conditions["saved_samples"])[0]
             self.saved_samples = self.ax_rrs.plot(self.conditions["wavelengths"], self.conditions["saved_samples"],

@@ -45,14 +45,6 @@ def build_widgets(self):
             indent=False
         )
 
-        # define saved sample widgets
-        saved_samples = widgets.Checkbox(
-            value=False,
-            description='Show saved Rrs spectra',
-            disabled=False,
-            indent=False
-        )
-
         # define saved spectra button
         save_spectra_button = widgets.Button(
             description='Save spectra',
@@ -61,7 +53,23 @@ def build_widgets(self):
             tooltip='Click me; saves to Saved_spectra.txt',
             icon=''
         )
+    
+        # define saved sample widgets
+        saved_samples = widgets.Checkbox(
+            value=False,
+            description='Show saved Rrs spectra',
+            disabled=False,
+            indent=False
+        )
 
+        # define saved adhoc widgets
+        adhoc_samples = widgets.Checkbox(
+            value=False,
+            description='Show adhoc Rrs spectra',
+            disabled=False,
+            indent=False
+        )
+    
         # define options widgets
         options_fQ = widgets.Checkbox(
             value=False,
@@ -79,4 +87,4 @@ def build_widgets(self):
         )
 
         return chl_slider, nap_slider, cdom_slider, rrs_samples,\
-               user_samples, saved_samples, save_spectra_button, options_fQ, options_two_species
+               user_samples, saved_samples, adhoc_samples, save_spectra_button, options_fQ, options_two_species
