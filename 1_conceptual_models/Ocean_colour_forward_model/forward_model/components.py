@@ -38,8 +38,7 @@ def calc_components(wavs, params, abs_water, abs_increment, scattering_coefficie
     total_backscatter = bbw + bbph + bbpNAP
 
     # calculate Rrs
-    gamma = np.pi * float(params["Reflectance_model"]["GothicR"]) * float(params["Reflectance_model"]["fprime_Q"])
-    rrs = gamma * total_backscatter / (total_absorption + total_backscatter) / np.pi
+    rrs = float(params["Reflectance_model"]["GothicR"]) * float(params["Reflectance_model"]["fprime_Q"]) * total_backscatter / (total_absorption + total_backscatter)
 
     components = {}
     components["aw"] = abs_water

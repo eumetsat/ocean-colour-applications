@@ -8,7 +8,7 @@ import os
 def read_rrs_samples(params):
 
     # read Rrs samples
-    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["sample_dir"],'*sample*.txt')
+    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["sample_dir"],'*sample*')
     sample_files = glob.glob(resolved_rrs_path)
     rrs_samples = []
     for sample_file in sample_files:
@@ -23,7 +23,7 @@ def read_rrs_samples(params):
 def read_rrs_user(params):
 
     # read Rrs samples
-    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["sample_dir"],'*user*.txt')
+    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["sample_dir"],'*user*')
     user_files = glob.glob(resolved_rrs_path)
     rrs_users = []
     for user_file in user_files:
@@ -38,7 +38,7 @@ def read_rrs_user(params):
 def read_rrs_adhoc(params):
 
     # read Rrs samples
-    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["adhoc_dir"],'*adhoc*.txt')
+    resolved_rrs_path=os.path.join(pathlib.Path(__file__).parent.resolve(), params["Rrs_samples"]["adhoc_dir"],'*adhoc*')
     adhoc_files = glob.glob(resolved_rrs_path)
     rrs_adhoc = []
     for adhoc_file in adhoc_files:

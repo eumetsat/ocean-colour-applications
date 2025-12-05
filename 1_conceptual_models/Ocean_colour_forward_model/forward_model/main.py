@@ -88,6 +88,9 @@ class ForwardModel(widgets.HBox):
         # functionality for the save spectra button
         save_spectra_button.on_click(self.save_spectra)
 
+        # define default colour map
+        self.cmap = plt.get_cmap("viridis")
+
         # set control panel
         self.controls = widgets.VBox([
             chl_slider, 
@@ -226,16 +229,27 @@ class ForwardModel(widgets.HBox):
                 item.set_visible(False)
 
     def show_adhoc_plots(self, change):
-        self.adhoc_samples = None
+        marker= "x"
+        markersize=10
         if change.new:
-            self.user_samples = [None] * np.shape(self.conditions["adhoc_samples"])[0]
-            for ii in range(np.shape(self.conditions["adhoc_samples"])[0]):
-                self.adhoc_samples = self.ax_rrs.plot(self.conditions["adhoc_samples"][ii,:,0], self.conditions["adhoc_samples"][ii,:,1],
-                                     color='m')
+            self.adhoc_samples = [None] * np.shape(self.conditions["adhoc_samples"])[0]
+            max_val = np.shape(self.conditions["adhoc_samples"])[0]
+            for ii in range(max_val):
+                if "OCI" in self.conditions["adhoc_files"][ii] or "PACE" in self.conditions["adhoc_files"]:
+                    marker="."
+                elif "MSI" in self.conditions["adhoc_files"][ii] or "S2" in self.conditions["adhoc_files"]:
+                    marker="s"
+                elif "OLCI" in self.conditions["adhoc_files"][ii] or "S3" in self.conditions["adhoc_files"]:
+                    marker="o"
+                self.adhoc_samples[ii] = self.ax_rrs.scatter(self.conditions["adhoc_samples"][ii,:,0], self.conditions["adhoc_samples"][ii,:,1],
+                                     s=markersize, color=self.cmap(float(ii)/float(max_val)), marker=marker)
         else:
-            if self.adhoc_samples:
+            # not clean, but we don't always have these plots
+            try:
                 for item in self.adhoc_samples:
                     item.set_visible(False)
+            except:
+                pass
 
     def show_saved_plots(self, change):
         if change.new:
