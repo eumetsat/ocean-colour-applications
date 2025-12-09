@@ -59,14 +59,14 @@ def set_spectral_absorption_plot(self, wavs, components):
         with self.output_spectral_absorption:
             self.fig3, self.ax_abs = plt.subplots(constrained_layout=True, figsize=(10,2))
 
-            self.line3a, = self.ax_abs.plot(wavs, components["total_absorption"], 'k')
-            self.line3b, = self.ax_abs.plot(wavs, components["aw"], 'r')
-            self.line3c, = self.ax_abs.plot(wavs, components["aph"], 'b')
-            self.line3d, = self.ax_abs.plot(wavs, components["aCDOM"], 'g')
-            self.line3e, = self.ax_abs.plot(wavs, components["aNAP"], '0.25')
+            self.line3a, = self.ax_abs.plot(wavs, components["total_absorption"], 'k', linewidth=2.0)
+            self.line3b, = self.ax_abs.plot(wavs, components["aw"], 'b', linewidth=1.0)
+            self.line3c, = self.ax_abs.plot(wavs, components["aph"], 'g', linewidth=1.0)
+            self.line3d, = self.ax_abs.plot(wavs, components["aCDOM"], '#59168B', linewidth=1.0)
+            self.line3e, = self.ax_abs.plot(wavs, components["aNAP"], '#FFB93B', linewidth=1.0)
 
             self.ax_abs.set_xlabel('$Wavelength \: [nm]$')
-            self.ax_abs.set_ylabel('$Absorption \: [m]^{-1}$')
+            self.ax_abs.set_ylabel('$Absorption \: [m^{-1}]$')
             self.ax_abs.set_xlim([min(wavs), max(wavs)])
             self.ax_abs.set_ylim(self.axis_limits["absorption_ylimits"])
             leg = plt.legend([self.line3a,
@@ -90,10 +90,10 @@ def set_spectral_backscatter_plot(self, wavs, components):
         with self.output_spectral_backscatter:
             self.fig4, self.ax_scat = plt.subplots(constrained_layout=True, figsize=(10,2))
 
-            self.line4a, = self.ax_scat.plot(wavs, np.log10(components["total_backscatter"]), 'k')
-            self.line4b, = self.ax_scat.plot(wavs, np.log10(components["bbw"]), 'r')
-            self.line4c, = self.ax_scat.plot(wavs, np.log10(components["bbph"]), 'g')
-            self.line4d, = self.ax_scat.plot(wavs, np.log10(components["bbpNAP"]), 'b')
+            self.line4a, = self.ax_scat.plot(wavs, np.log10(components["total_backscatter"]), 'k', linewidth=2.0)
+            self.line4b, = self.ax_scat.plot(wavs, np.log10(components["bbw"]), 'b', linewidth=1.0)
+            self.line4c, = self.ax_scat.plot(wavs, np.log10(components["bbph"]), 'g', linewidth=1.0)
+            self.line4d, = self.ax_scat.plot(wavs, np.log10(components["bbpNAP"]), '#FFB93B', linewidth=1.0)
 
             self.ax_scat.set_xlabel('$Wavelength \: [nm]$')
             self.ax_scat.set_ylabel('$Backscatter \: [m^{-1}]$')

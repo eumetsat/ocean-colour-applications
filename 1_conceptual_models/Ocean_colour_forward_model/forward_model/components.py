@@ -12,7 +12,7 @@ def calc_aphy(abs, scatt, chl, maxval=0.000000001):
 def calc_bbp_ph_nu(chl):
 
     if chl < 2:
-        bbp_ph_nu = np.log10(chl) - 0.3
+        bbp_ph_nu = 0.5 * (np.log10(chl) - 0.3)
     else:
         bbp_ph_nu = 0
 
@@ -32,8 +32,8 @@ def calc_components(wavs, params, abs_water, abs_increment, scattering_coefficie
     total_absorption = abs_water + aph + aNAP + aCDOM
 
     # backscattering calculations
-    bbw = float(params["IOPs_pure_water"]["bbw_bw"]) * float(params["IOPs_pure_water"]["bw500"]) * (wavs / 500.0) ** float(params["IOPs_pure_water"]["nw"])
-    bbph = (0.002 + 0.01 * np.max([0.0, 0.5 - 0.25 * np.log10(chl)]) * (wavs / 550.0) ** bbp_ph_nu) * 0.416 * chl ** 0.766
+    bbw = float(params["IOPs_pure_water"]["bbw_bw"]) * float(params["IOPs_pure_water"]["bw500"]) * ((wavs / 500.0) ** float(params["IOPs_pure_water"]["nw"]))   
+    bbph = (0.002 + 0.01 * (0.5 - 0.25 * np.log10(chl)) * (wavs / 550.0) ** bbp_ph_nu) * 0.416 * chl ** 0.766   
     bbpNAP = float(params["IOP_model"]["bbp_star_555"]) * nap * (wavs / 555.0) ** float(params["IOP_model"]["np"])
     total_backscatter = bbw + bbph + bbpNAP
 
