@@ -1,29 +1,51 @@
-# copyright: 2025 European Union
+# copyright: 2026 European Union
 # license: LICENSE.txt
 name: cmts_ocean_colour_applications
 channels:
   - conda-forge
+  - cmts
+  - eumetsat
 dependencies:
   # Core
-  - conda-forge::python=3.10
+  - conda-forge::bokeh
+  - conda-forge::cartopy
+  - conda-forge::cmocean
+  - conda-forge::dask
+  - conda-forge::dask-labextension
+  - conda-forge::distributed
+  - conda-forge::hda
   - conda-forge::ipywidgets
   - conda-forge::jupyterlab
   - conda-forge::matplotlib
-  - conda-forge::xarray
-  - conda-forge::cartopy
-  - conda-forge::scipy
   - conda-forge::netcdf4
-  - conda-forge::zarr
-  - conda-forge::dask
-  - conda-forge::pandas
+  - conda-forge::pip
+  - conda-forge::python=3.13
+  - conda-forge::scikit-image
+  - conda-forge::scipy
+  - conda-forge::shapely
+  - conda-forge::xarray
+  - pip:
+    - destinelab
+    - eocanvas
   # External
+  - cmts::eumartools
   - eumetsat::eumdac
   # Extension
+  - conda-forge::copernicusmarine
+  # Extension: ThoMaS support
   - conda-forge::beautifulsoup4
-  - conda-forge::copernicusmarine=1.3
   - conda-forge::cdsapi
+  - conda-forge::earthaccess
   - conda-forge::ephem
-  - conda-forge::urllib3  # < target to remove (replicate with requests?)
+  - conda-forge::pandas
+  - conda-forge::urllib3
+  - conda-forge::statsmodels
+  # Extension: Unknown
+  - conda-forge::zarr
+  - conda-forge::python-ternary
+  - conda-forge::pyinterp
+  - conda-forge::libgdal-jp2openjpeg
+  - conda-forge::numcodecs
   - conda-forge::ipympl
   - conda-forge::xcube=1.5
   - conda-forge::seaborn  # < target to remove
@@ -36,7 +58,3 @@ dependencies:
   - conda-forge::tf-keras  
   - conda-forge::tensorflow
   - conda-forge::tensorflow-probability
-  - pip
-  - pip:
-    - eocanvas
-    - hda

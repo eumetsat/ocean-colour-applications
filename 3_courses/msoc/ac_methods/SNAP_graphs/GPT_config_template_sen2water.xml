@@ -1,0 +1,22 @@
+<graph id="Graph">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>SOURCE_PRODUCT</file>
+    </parameters>
+  </node>
+
+  <node id="Sen2Water">
+    <operator>Sen2Water-0.6.3</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputdir>OUTPUT_PRODUCT</outputdir>
+    </parameters>
+  </node>
+
+</graph>

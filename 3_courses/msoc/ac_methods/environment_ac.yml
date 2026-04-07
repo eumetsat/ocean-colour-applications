@@ -1,0 +1,34 @@
+# copyright: MSOC training team
+# license: LICENSE.txt
+name: msoc_ac
+channels:
+  - conda-forge
+dependencies:
+  # Core
+  - pip
+  - conda-forge::python=3.11
+  - conda-forge::matplotlib
+  - conda-forge::scipy
+  - conda-forge::pyproj
+  - conda-forge::gdal
+  - conda-forge::netcdf4
+  - conda-forge::pyhdf
+  - conda-forge::requests
+  - conda-forge::statsmodels
+  - conda-forge::basemap
+  - conda-forge::pillow
+  - conda-forge::scikit-image
+  - conda-forge::pyresample
+  - conda-forge::xarray
+  - conda-forge::h5py
+  - conda-forge::wget
+  - conda-forge::git
+  - conda-forge::meson=1.9.0
+  - conda-forge::cython=3.0.12
+  - conda-forge::glymur
+  - conda-forge::numpy=1.26.4
+  - conda-forge::libgdal-jp2openjpeg
+  # - conda-forge::gcc # deliberately commented out as its dangerous if you have an existing gcc compiler - this is a fallback only!
+  - pip:
+    - core @ git+https://github.com/hygeos/core@85a28c303d28fdae71ee0772fee06d49cbac4fda
+  

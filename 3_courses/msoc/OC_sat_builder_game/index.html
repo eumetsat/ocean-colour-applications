@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ocean Colour Satellite Designer — Layers</title>
+<style>
+  :root{--bg:#f6fbfe;--card:#fff;--muted:#6b7280;--accent:#0ea5a4}
+  body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;margin:18px;background:var(--bg);color:#0f172a}
+  h1{margin:0 0 6px;font-size:22px}
+  p.lead{margin:0 0 14px;color:var(--muted)}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+  input[type=number]{width:110px;padding:6px;border-radius:6px;border:1px solid #d1d5db}
+  select{padding:6px;border-radius:6px;border:1px solid #d1d5db}
+  button{cursor:pointer;padding:8px 10px;border-radius:8px;border:0;background:var(--accent);color:white}
+  .layout {display: grid;grid-template-columns: 450px 1fr; /* increase from 360px to 450px */gap: 16px;align-items: start;}
+  .left{max-width:500px}
+  .card{background:var(--card);border-radius:10px;padding:12px;border:1px solid #e6eef2;box-shadow:0 1px 2px rgba(2,6,23,.04)}
+  .card.category {width: 100%;}
+  .satellite-container{position:relative;width:100%;max-width:800px;margin:10px auto;border: 2px dashed red}
+  .satellite-container img{position:absolute;top:0;left:0;width:100%;height:auto;display:none;user-select:none;pointer-events:none}
+  .satellite-container img.base        { z-index: 1; }  /* bus at bottom */
+  .satellite-container img.power       { z-index: 5; }  /* solar panels */
+  .satellite-container img.orbit       { z-index: 10; } /* orbit markers */
+  .satellite-container img.calibration { z-index: 15; } /* calibration gear */
+  .satellite-container img.detector    { z-index: 25; }
+  .satellite-container img.optics      { z-index: 30; } /* telescope */
+  .satellite-container img.addons      { z-index: 35; } /* polarimeter, thermal */
+  .satellite-container img.downlink    { z-index: 40; } /* antenna top-most */
+  .satellite-container img.spectrometer{ z-index: 45; }
+  .status{margin-bottom:10px}
+  .category{margin-bottom:10px}
+  .cat-title{font-weight:600;margin-bottom:8px}
+  .option{padding:8px;border-radius:8px;border:1px solid #e6eef2;margin-bottom:6px;cursor:pointer;background:#fbfeff}
+  .option.active{outline:2px solid rgba(14,165,164,.18);box-shadow:0 2px 6px rgba(14,165,164,.06)}
+  .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .muted{color:var(--muted)}
+  .controls-row{display:flex;gap:8px;flex-wrap:wrap}
+  .small{font-size:13px;padding:6px 8px}
+  .row{display:flex;gap:8px;align-items:center}
+  .export{background:#eef2ff;color:#3730a3}
+  .danger{background:#fee2e2;color:#b91c1c}
+  footer{margin-top:14px;font-size:12px;color:var(--muted)}
+  pre{white-space:pre-wrap;font-size:12px}
+  @media (max-width:980px){ .layout{grid-template-columns:1fr} .left{max-width:none} }
+</style>
+</head>
+<body>
+  <h1>Ocean Colour Satellite Designer</h1>
+  <p class="lead">Layers-based preview: your transparent PNGs stack over the base image. Edit selections to update the satellite image, budget & mass are enforced, and auto-optimize can search combinations.</p>
+
+  <div class="controls">
+    <div class="row">
+      <label class="muted" for="budget">Budget ($M)</label>
+      <input id="budget" type="number" value="600" min="0" />
+    </div>
+    <div class="row">
+      <label class="muted" for="massLimit">Launch mass (kg)</label>
+      <input id="massLimit" type="number" value="600" min="0" />
+    </div>
+    <div class="row">
+      <label class="muted" for="profile">Mission</label>
+      <select id="profile"></select>
+    </div>
+    <div class="controls-row">
+      <!-- <button id="optBtn">Auto-optimize</button> -->
+      <button id="optBtn" style="display:none">Auto-optimize</button>
+      <button id="exportBtn" class="export small">Export JSON</button>
+      <label style="display:inline-block;cursor:pointer">
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+        <span class="small card" style="display:inline-block">Import</span>
+      </label>
+      <button id="resetBtn" class="small">Reset</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left">
+      <div id="status" class="card status"></div>
+
+      <div id="controlsList" style="margin-top:12px"></div>
+      <footer>
+        Image naming convention: <code>layers/&lt;category&gt;-&lt;optionId&gt;.png</code> (e.g. <code>layers/optics-o1.png</code>). All images should be the same resolution (e.g. 1024×809).
+      </footer>
+    </div>
+
+    <div>
+      <div class="card satellite-card">
+        <div class="satellite-container" id="sat-container" style="height:0;padding-bottom:79.0%"> 
+          <!-- padding-bottom keeps container aspect ratio; set to (809/1024*100)=79.0% -->
+          <!-- The <img> elements are absolute positioned and will scale to container width -->
+          <img class="base "src="layers/base_image.png" alt="base" />
+          <!-- Below: all component layers (one <img> per option). Update file names if you used different names. -->
+          <!-- Optics -->
+          <img class="optics" data-option="o1" src="layers/optics_small.png" alt="optics o1">
+          <img class="optics" data-option="o2" src="layers/optics_medium.png" alt="optics o2">
+          <img class="optics" data-option="o3" src="layers/optics_large.png" alt="optics o3">
+          <img class="optics" data-option="o4" src="layers/optics_vlarge.png" alt="optics o4">
+          <!-- Spectrometer -->
+          <img class="spectrometer" data-option="s1" src="layers/multi_spectral.png" alt="spec s1">
+          <img class="spectrometer" data-option="s2" src="layers/enhanced_multi_spectral.png" alt="spec s2">
+          <img class="spectrometer" data-option="s3" src="layers/Hyper_spectral.png" alt="spec s3">
+          <img class="spectrometer" data-option="s4" src="layers/Hyper_plus_spectral.png" alt="spec s4">
+          <!-- Detector -->
+          <img class="detector" data-option="d1" src="layers/base_image.png" alt="det d1">
+          <img class="detector" data-option="d2" src="layers/null.png" alt="det d2">
+          <img class="detector" data-option="d3" src="layers/null.png" alt="det d3">
+          <!-- Orbit -->
+          <img class="orbit" data-option="or1" src="layers/orbit_1.png" alt="orbit or1">
+          <img class="orbit" data-option="or2" src="layers/orbit_2.png" alt="orbit or2">
+          <img class="orbit" data-option="or3" src="layers/orbit_3.png" alt="orbit or3">
+          <!-- Downlink -->
+          <img class="downlink" data-option="x1" src="layers/null.png" alt="downlink x1">
+          <img class="downlink" data-option="x2" src="layers/null.png" alt="downlink x2">
+          <img class="downlink" data-option="x3" src="layers/null.png" alt="downlink x3">
+          <!-- Power -->
+          <img class="power" data-option="p1" src="layers/power_low.png" alt="power p1">
+          <img class="power" data-option="p2" src="layers/power_medium.png" alt="power p2">
+          <img class="power" data-option="p3" src="layers/power_high.png" alt="power p3">
+          <!-- Calibration -->
+          <img class="calibration" data-option="c1" src="layers/null.png" alt="cal c1">
+          <img class="calibration" data-option="c2" src="layers/null.png" alt="cal c2">
+          <img class="calibration" data-option="c3" src="layers/null.png" alt="cal c3">
+          <!-- Addons -->
+          <img class="addons" data-option="a0" src="layers/null.png" alt="addons a0">
+          <img class="addons" data-option="a1" src="layers/null.png" alt="addons a1">
+          <img class="addons" data-option="a2" src="layers/null.png" alt="addons a2">
+          <img class="addons" data-option="a3" src="layers/null.png" alt="addons a3">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* =========================
+   Full game logic & data
+   ========================= */
+
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+
+// Full catalog with caps (matching previous React version)
+const CATALOG = {
+  spectrometer: [
+    { id: "s1", name: "Multispectral (8 bands)", cost: 30, mass: 20, caps: { bands: 8, fwhm_nm: 20, data_need: 200, power_need: 150 } },
+    { id: "s2", name: "Enhanced MS (16 bands)", cost: 55, mass: 26, caps: { bands: 16, fwhm_nm: 10, data_need: 400, power_need: 250 } },
+    { id: "s3", name: "Hyperspectral (120 bands)", cost: 120, mass: 45, caps: { bands: 120, fwhm_nm: 5, data_need: 900, power_need: 350 } },
+    { id: "s4", name: "Hyper+ (200 bands)", cost: 170, mass: 60, caps: { bands: 200, fwhm_nm: 4, data_need: 1300, power_need: 450 } },
+  ],
+    optics: [
+    { id: "o1", name: "Small (20 cm)", cost: 25, mass: 35, caps: { res_m: 120, snr: 300, swath_km: 100, data_need: 100, power_need: 50 } },
+    { id: "o2", name: "Medium (40 cm)", cost: 60, mass: 75, caps: { res_m: 60, snr: 380, swath_km: 80, data_need: 250, power_need: 150  } },
+    { id: "o3", name: "Large (60 cm)", cost: 100, mass: 120, caps: { res_m: 30, snr: 420, swath_km: 60, data_need: 500, power_need: 300  } },
+    { id: "o4", name: "Very Large (80 cm)", cost: 150, mass: 180, caps: { res_m: 15, snr: 460, swath_km: 45, data_need: 900, power_need: 400  } },
+  ],
+  orbit: [
+    { id: "or1", name: "Single SSO (10:30)", cost: 0, mass: 0, caps: { revisit_days: 5, swath_km: 1200 } },
+    { id: "or2", name: "2 satellites (phased)", cost: 150, mass: 30, caps: { revisit_days: 2.5, swath_km: 1200 } },
+    { id: "or3", name: "3 satellites (phased)", cost: 300, mass: 60, caps: { revisit_days: 1.7, swath_km: 1200 } },
+  ],
+  downlink: [
+    { id: "x1", name: "X-band 300 Mbps", cost: 25, mass: 14, caps: { downlink_mbps: 300 } },
+    { id: "x2", name: "X-band 800 Mbps", cost: 60, mass: 18, caps: { downlink_mbps: 800 } },
+    { id: "x3", name: "Ka-band 1.5 Gbps", cost: 120, mass: 24, caps: { downlink_mbps: 1500 } },
+  ],
+  power: [
+    { id: "p1", name: "Basic (400 W)", cost: 30, mass: 20, caps: { power_w: 400 } },
+    { id: "p2", name: "Enhanced (800 W)", cost: 45, mass: 40, caps: { power_w: 800 } },
+    { id: "p3", name: "High (1200 W)", cost: 50, mass: 60, caps: { power_w: 1200 } },
+  ],
+  calibration: [
+    { id: "c1", name: "Basic (lamps only)", cost: 10, mass: 8, caps: { cal_grade: 0.4 } },
+    { id: "c2", name: "Enhanced (lamps + diffuser)", cost: 25, mass: 12, caps: { cal_grade: 0.7 } },
+    { id: "c3", name: "Precision (onboard sphere)", cost: 55, mass: 20, caps: { cal_grade: 1.0 } },
+  ],
+  addons: [
+    { id: "a0", name: "None", cost: 0, mass: 0, caps: { polarimeter: false, thermal: false } },
+    { id: "a1", name: "Polarimeter", cost: 45, mass: 22, caps: { polarimeter: true, thermal: false, data_need:300, power_need:100  } },
+    { id: "a2", name: "Thermal Imager", cost: 65, mass: 28, caps: { polarimeter: false, thermal: true, data_need:300, power_need:100  } },
+    { id: "a3", name: "Both", cost: 95, mass: 46, caps: { polarimeter: true, thermal: true, data_need:300, power_need:100  } },
+  ]
+};
+
+// Mission profiles (weights + requirements)
+const PROFILES = {
+  coast: {
+    name: "Coastal Water Quality",
+    weights: { res: 0.25, snr: 0.2, bands: 0.2, revisit: 0.2, swath: 0.05, cal: 0.1 },
+    req: { res_m: 60, snr: 400, bands: 12, revisit_days: 3, swath_km: 100, cal_grade: 0.8 },
+    extras: { polarimeter_bonus: 0.05, thermal_bonus: 0.0 }
+  },
+  open: {
+    name: "Open Ocean Biogeochem",
+    weights: { res: 0.15, snr: 0.3, bands: 0.25, revisit: 0.15, swath: 0.1, cal: 0.05 },
+    req: { res_m: 300, snr: 700, bands: 150, revisit_days: 2, swath_km: 1400, cal_grade: 0.7 },
+    extras: { polarimeter_bonus: 0.03, thermal_bonus: 0.0 }
+  },
+  hab: {
+    name: "HAB Rapid Response",
+    weights: { res: 0.3, snr: 0.2, bands: 0.15, revisit: 0.25, swath: 0.05, cal: 0.05 },
+    req: { res_m: 30, snr: 350, bands: 10, revisit_days: 1, swath_km: 200, cal_grade: 0.8 },
+    extras: { polarimeter_bonus: 0.03, thermal_bonus: 0.02 }
+  }
+};
+
+// default selection = first option in each category
+let selection = {};
+for (const cat in CATALOG) selection[cat] = CATALOG[cat][0];
+let currentProfile = 'coast';
+
+// aggregate capabilities from selection
+function summarize(sel) {
+  const agg = {
+    res_m: Infinity,
+    snr: 0,
+    bands: 0,
+    fwhm_nm: Infinity,
+    swath_km: 0,
+    revisit_days: Infinity,
+    bits: 0,
+    cal_grade: 0,
+
+    power_need: 0,
+    power_w: 0,
+    data_need: 0,
+    downlink_mbps: 0,
+
+    polarimeter: false,
+    thermal: false,
+  };
+
+  for (const cat in sel) {
+    const opt = sel[cat];
+    if (!opt?.caps) continue;
+    const c = opt.caps;
+
+    // Required
+    agg.power_need += (c.power_need ?? 0);
+    agg.data_need += (c.data_need ?? 0);
+
+    // Capacity
+    if (c.power_w != null) agg.power_w = Math.max(agg.power_w, c.power_w);
+    if (c.downlink_mbps != null) agg.downlink_mbps = Math.max(agg.downlink_mbps, c.downlink_mbps);
+
+    // previous fields unchanged
+    if (c.res_m != null) agg.res_m = Math.min(agg.res_m, c.res_m);
+    if (c.snr != null) agg.snr = Math.max(agg.snr, c.snr);
+    if (c.bands != null) agg.bands = Math.max(agg.bands, c.bands);
+    if (c.fwhm_nm != null) agg.fwhm_nm = Math.min(agg.fwhm_nm, c.fwhm_nm);
+    if (c.swath_km != null) agg.swath_km = Math.max(agg.swath_km, c.swath_km);
+    if (c.revisit_days != null) agg.revisit_days = Math.min(agg.revisit_days, c.revisit_days);
+    if (c.bits != null) agg.bits = Math.max(agg.bits, c.bits);
+    if (c.cal_grade != null) agg.cal_grade = Math.max(agg.cal_grade, c.cal_grade);
+    if (c.polarimeter) agg.polarimeter = true;
+    if (c.thermal) agg.thermal = true;
+  }
+
+  return agg;
+}
+
+// scoring function (returns 0..1)
+function missionScore(agg, profile) {
+  // reject if unpowered / insufficient data pipe
+  if (agg.power_need > agg.power_w) return 0;
+  if (agg.data_need > agg.downlink_mbps) return 0;
+
+  const { weights, req, extras } = profile;
+
+  const resN = clamp01(req.res_m / agg.res_m);
+  const snrN = clamp01(agg.snr / (req.snr * 1.5));
+  const bandsN = clamp01(agg.bands / (req.bands));
+  const revN = clamp01(req.revisit_days / agg.revisit_days);
+  const swathN = clamp01(agg.swath_km / req.swath_km);
+  const calN = clamp01(agg.cal_grade / req.cal_grade);
+
+  let s =
+    weights.res * resN +
+    weights.snr * snrN +
+    weights.bands * bandsN +
+    weights.revisit * revN +
+    weights.swath * swathN +
+    weights.cal * calN;
+
+  if (agg.polarimeter) s += extras.polarimeter_bonus || 0;
+  if (agg.thermal) s += extras.thermal_bonus || 0;
+
+  return clamp01(s);
+}
+
+// totals
+function totals(sel) {
+  let cost = 0, mass = 0;
+  for (const cat in sel) {
+    const o = sel[cat];
+    if (!o) continue;
+    cost += (o.cost ?? 0);
+    mass += (o.mass ?? 0);
+  }
+  return { cost, mass };
+}
+
+// show/hide appropriate layer images (stacked)
+function updateSatelliteImages(sel) {
+  const container = document.getElementById('sat-container');
+
+  // Show the base image explicitly
+  const baseImg = container.querySelector('img.base');
+  if (baseImg) baseImg.style.display = 'block';
+
+  // Hide all other layers first
+  container.querySelectorAll('img:not(.base)').forEach(img => img.style.display = 'none');
+
+  // Show selected options
+  for (const cat in sel) {
+    const optId = sel[cat] && sel[cat].id;
+    if (!optId) continue;
+    const el = container.querySelector(`.${cat}[data-option="${optId}"]`);
+    if (el) el.style.display = 'block';
+  }
+}
+
+// build UI controls (category cards + options)
+function buildControls() {
+  const container = document.getElementById('controlsList');
+  container.innerHTML = '';
+  for (const cat in CATALOG) {
+    const card = document.createElement('div');
+    card.className = 'card category';
+    const title = document.createElement('div');
+    title.className = 'cat-title';
+    title.textContent = cat;
+    card.appendChild(title);
+
+    CATALOG[cat].forEach(opt => {
+      const optDiv = document.createElement('div');
+      optDiv.className = 'option';
+      if (selection[cat] && selection[cat].id === opt.id) optDiv.classList.add('active');
+
+      optDiv.innerHTML = `<div style="font-weight:600">${opt.name}</div>
+        <div class="meta">Cost: $${opt.cost} M · Mass: ${opt.mass} kg</div>`;
+
+      optDiv.addEventListener('click', () => {
+        selection[cat] = opt;
+        render();
+      });
+
+      card.appendChild(optDiv);
+    });
+
+    container.appendChild(card);
+  }
+}
+
+// render status, controls, image layers
+function render() {
+  // update controls active states quickly
+  document.querySelectorAll('.option').forEach(el => el.classList.remove('active'));
+  // re-add active class where appropriate
+  // we can find option elements by matching the inner text (slightly fragile) but easier: rebuild controls
+  buildControls();
+
+  const budget = Number(document.getElementById('budget').value) || 0;
+  const massLimit = Number(document.getElementById('massLimit').value) || 0;
+  const totalsNow = totals(selection);
+  const agg = summarize(selection);
+  const sc = missionScore(agg, PROFILES[currentProfile]);
+  const valid = totalsNow.cost <= budget && totalsNow.mass <= massLimit;
+
+  const status = document.getElementById('status');
+  status.innerHTML = `
+  <div style="display:flex;justify-content:space-between;gap:20px;align-items:flex-start; width:100%">
+    <div style="flex:1 1 0">
+      <div style="font-weight:700">${PROFILES[currentProfile].name}</div>
+      <div class="muted">Score: <strong>${(valid ? (sc*100).toFixed(1) : 0)}%</strong> ${!valid ? '<span style="color:#b91c1c"> (exceeds constraints)</span>' : ''}</div>
+      <div class="muted">Resolution ≤ ${agg.res_m === Infinity ? '—' : `${agg.res_m} m`} · SNR ${Math.round(agg.snr)} · Bands ${agg.bands}</div>
+      <div class="muted">Revisit ${agg.revisit_days === Infinity ? '—' : `${agg.revisit_days} d`} · Swath ${agg.swath_km} km · Cal ${(agg.cal_grade*100).toFixed(0)}%</div>
+    </div>
+
+    <div style="flex:1 1 0; text-align:right">
+      <div class="muted">Budget</div>
+      <div><strong>$${totalsNow.cost}M</strong> / $${budget}M</div>
+      <div class="muted" style="margin-top:8px">Mass</div>
+      <div><strong>${totalsNow.mass} kg</strong> / ${massLimit} kg</div>
+    </div>
+
+    <div style="flex:1 1 0">
+      <div class="muted">
+        Power: <strong>${agg.power_need} W</strong> / ${agg.power_w} W
+        ${agg.power_need > agg.power_w ? '<span style="color:#b91c1c"> (EXCEEDED)</span>' : ''}
+      </div>
+      <div class="muted" style="margin-top:8px">
+        Data: <strong>${agg.data_need} Mbps</strong> / ${agg.downlink_mbps} Mbps
+        ${agg.data_need > agg.downlink_mbps ? '<span style="color:#b91c1c"> (EXCEEDED)</span>' : ''}
+      </div>
+    </div>
+  </div>
+`;
+
+
+  updateSatelliteImages(selection);
+}
+
+// brute-force optimizer (returns best selection under constraints)
+function autoOptimize() {
+  const budget = Number(document.getElementById('budget').value) || 0;
+  const massLimit = Number(document.getElementById('massLimit').value) || 0;
+  const cats = Object.keys(CATALOG);
+
+  let bestSel = null;
+  let bestScore = -1;
+
+  function dfs(idx, sel, curCost, curMass) {
+    if (curCost > budget || curMass > massLimit) return;
+
+    if (idx === cats.length) {
+      const agg = summarize(sel);
+      if (agg.power_need <= agg.power_w && agg.data_need <= agg.downlink_mbps) {
+        const sc = missionScore(agg, PROFILES[currentProfile]);
+        if (sc > bestScore) { bestScore = sc; bestSel = JSON.parse(JSON.stringify(sel)); }
+      }
+      return;
+    }
+
+    const cat = cats[idx];
+    for (const opt of CATALOG[cat]) {
+      sel[cat] = opt;
+      dfs(idx + 1, sel, curCost + (opt.cost||0), curMass + (opt.mass||0));
+    }
+  }
+
+  dfs(0, {}, 0, 0);
+
+  if (bestSel) {
+    selection = bestSel;
+    render();
+  } else {
+    alert('No valid combination fits the current budget/mass limits.');
+  }
+}
+
+// export / import
+function exportDesign() {
+  const payload = {
+    budget: Number(document.getElementById('budget').value) || 0,
+    massLimit: Number(document.getElementById('massLimit').value) || 0,
+    profile: currentProfile,
+    selection: Object.fromEntries(Object.entries(selection).map(([k,v]) => [k, v ? v.id : null]))
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'satellite-design.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importDesignFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (typeof data.budget === 'number') document.getElementById('budget').value = data.budget;
+      if (typeof data.massLimit === 'number') document.getElementById('massLimit').value = data.massLimit;
+      if (typeof data.profile === 'string') { currentProfile = data.profile; document.getElementById('profile').value = currentProfile; }
+      if (data.selection && typeof data.selection === 'object') {
+        for (const cat in data.selection) {
+          const id = data.selection[cat];
+          if (!id) continue;
+          const found = (CATALOG[cat] || []).find(o => o.id === id);
+          if (found) selection[cat] = found;
+        }
+      }
+      render();
+    } catch (e) {
+      alert('Invalid file.');
+      console.error(e);
+    }
+  };
+  reader.readAsText(file);
+}
+
+// wire UI
+document.getElementById('optBtn').addEventListener('click', () => { autoOptimize(); });
+document.getElementById('exportBtn').addEventListener('click', exportDesign);
+document.getElementById('importFile').addEventListener('change', (ev) => importDesignFile(ev.target.files[0]));
+document.getElementById('resetBtn').addEventListener('click', () => {
+  selection = {};
+  for (const cat in CATALOG) selection[cat] = CATALOG[cat][0];
+  currentProfile = 'coast';
+  document.getElementById('profile').value = currentProfile;
+  document.getElementById('budget').value = 600;
+  document.getElementById('massLimit').value = 600;
+  render();
+});
+
+// populate profile selector
+const profileSel = document.getElementById('profile');
+for (const id in PROFILES) {
+  const o = document.createElement('option');
+  o.value = id; o.text = PROFILES[id].name;
+  profileSel.add(o);
+}
+profileSel.value = currentProfile;
+profileSel.addEventListener('change', () => { currentProfile = profileSel.value; render(); });
+
+// initial render
+render();
+document.querySelector('.optics[data-option="o1"]').style.display = 'block';
+</script>
+</body>
+</html>
