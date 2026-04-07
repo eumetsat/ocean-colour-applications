@@ -8,23 +8,3 @@
 	url = https://github.com/wekeo/working-with-python.git
 	shallow = true
 	branch = main
-[submodule "learn-olci"]
-	path = learn-olci
-	url = https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/sensors/learn-olci.git
-	shallow = true
-	branch = main
-[submodule "ThoMaS"]
-	path = ThoMaS
-	url = https://gitlab.eumetsat.int/eumetlab/oceans/ocean-science-studies/ThoMaS.git
-	shallow = true
-	branch = main
-[submodule "3_courses/msoc/pace-2025"]
-	path = 3_courses/msoc/pace-2025
-	url = https://github.com/PACEHackWeek/pace-2025
-	shallow = true
-	branch = main
-[submodule "3_courses/msoc/oceandata-notebooks"]
-	path = 3_courses/msoc/oceandata-notebooks
-	url = https://github.com/nasa/oceandata-notebooks.git
-	shallow = true
-	branch = main
