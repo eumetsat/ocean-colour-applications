@@ -19,7 +19,7 @@ dependencies:
   - conda-forge::matplotlib
   - conda-forge::netcdf4
   - conda-forge::pip
-  - conda-forge::python=3.13
+  - conda-forge::python=3.12 # NOTE: OLDER VERSION COMPARED TO OTHER ENVIRONMENTS!
   - conda-forge::scikit-image
   - conda-forge::scipy
   - conda-forge::shapely
@@ -40,14 +40,13 @@ dependencies:
   - conda-forge::pandas
   - conda-forge::urllib3
   - conda-forge::statsmodels
-  # Extension: Unknown
+  # Extension: Unknown: everything below here is suspect!
   - conda-forge::zarr
-  - conda-forge::python-ternary
   - conda-forge::pyinterp
   - conda-forge::libgdal-jp2openjpeg
   - conda-forge::numcodecs
   - conda-forge::ipympl
-  - conda-forge::xcube=1.5
+  - conda-forge::xcube
   - conda-forge::seaborn  # < target to remove
   - conda-forge::spectral  # < target to remove
   - conda-forge::scikit-image

@@ -24,6 +24,7 @@ wheels/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+.virtual_documents
 
 # Large data
 *.nc
@@ -33,10 +34,13 @@ wheels/
 *.zarr
 
 # OSx junk
-*DS_Store*
+.DS_Store
 
 # Repo specific
-/2_methodological_approaches/Insitu_comparison/ThoMaS
-/2_methodological_approaches/Insitu_comparison/Cruise
-/2_methodological_approaches/eocanvas/OLCI_L2_CHL_cube.zarr
+/2_methodological_approaches/2_insitu_comparison/ThoMaS
+/2_methodological_approaches/2_insitu_comparison/Cruise
+/2_methodological_approaches/3_eocanvas/OLCI_L2_CHL_cube.zarr
 /2_methodological_approaches/ML/S2_3_MDN/MDN
+/3_courses/msoc/Data
+/3_courses/msoc/Day5/MOBY
+/3_courses/msoc/Day5/Casablanca_Platform

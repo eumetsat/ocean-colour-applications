@@ -1,3 +1,10 @@
+v2.0.0: 08.04.2026
+
+- updated to includes 2025 MSOC course materials
+- updated to unclude machine learning workflows
+- updated to recent python implementations
+- many minor updates to formatting and package organisation
+
 v1.0.0: 25.10.2024
 
 - first release!

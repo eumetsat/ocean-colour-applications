@@ -1,15 +1,20 @@
 # List of development authors
 * Ben Loveday (Innoflair UG / EUMETSAT)
-* Hayley Evers-King (EUMETSAT)
 * Aida Alvera-Azcárate (GHER)
 * Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
-* Kevin Ruddick (RBINS)
 * Anna-Lena Erdmann (EUMETSAT)
+* Anna Windle diPaolo (NASA)
+* Brandon Smith (NASA)
+* Carine Poulin (NASA)
+* Hayley Evers-King (EUMETSAT)
 * Juan Ignacio-Gossn (EUMETSAT)
+* Kevin Ruddick (RBINS)
+* Nima Pahlevan (NASA)
+* Thomas Jackson (EUMETSAT)
 
 # List of contributory authors
-Christian Hill
-Stewart Bernard (CSIR)
-Lauren Biermann (Plymouth University)
-Nima Pahlevan (NASA)
-Brandon Smith (NASA)
+* Lauren Biermann (Plymouth University)
+* Javier A. Concha (Serco for ESA)
+* Vittorio Brando (CNR)
+* Christian Hill
+* Stewart Bernard (CSIR)

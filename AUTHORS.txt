@@ -1,22 +1,27 @@
 # Copyright holder
-copyright: 2024 European Union
+copyright: 2026 European Union
 license: LICENSE.txt
 
 # List of development authors
 Ben Loveday (Innoflair UG / EUMETSAT)
-Hayley Evers-King (EUMETSAT)
 Aida Alvera-Azcárate (GHER)
 Ana Ruescas (Brockmann Consult GmbH / University of Valencia)
-Kevin Ruddick (RBINS)
 Anna-Lena Erdmann (EUMETSAT)
+Anna Windle diPaolo (NASA)
+Brandon Smith (NASA)
+Carine Poulin (NASA)
+Hayley Evers-King (EUMETSAT)
 Juan Ignacio-Gossn (EUMETSAT)
+Kevin Ruddick (RBINS)
+Nima Pahlevan (NASA)
+Thomas Jackson (EUMETSAT)
 
 # List of contributory authors
+Lauren Biermann (Plymouth University)
+Javier A. Concha (Serco for ESA)
+Vittorio Brando (CNR)
 Christian Hill
 Stewart Bernard (CSIR)
-Lauren Biermann (Plymouth University)
-Nima Pahlevan (NASA)
-Brandon Smith (NASA)
 
 # Support
 For all queries on this software package, please contact ops@eumetsat.int

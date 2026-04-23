@@ -1,9 +1,9 @@
 # Component information
 name: ocean-colour-applications
 description: Compendium of training content associated with concepts, models and methodological approaches for working with ocean colour products from Earth observation.
-copyright: 2025 European Union
+copyright: 2026 European Union
 license_spdx: MIT
-date: 01-04-2025
+date: 08-04-2026
 home_url: https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-colour-applications
 
 # Package IPR documentation
@@ -11,53 +11,91 @@ license_text_file: LICENSE.txt
  
 # File(s) associated to this component
 
-about_resource: ./2_methodological_approaches/ML/ML_regression/3_WQ_predict_image.ipynb
-about_resource: ./2_methodological_approaches/ML/ML_regression/README.ipynb
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/data_load_S3.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/models.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/c2_processing.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/ml_regression.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/__init__.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/Py4R_plots.py
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/models/RFR_S3bands_CHL.pkl
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/models/RLR_S3bands_CHL.pkl
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/data/C2_test.txt
-about_resource: ./2_methodological_approaches/ML/ML_regression/ml/data/C2_train.txt
-about_resource: ./2_methodological_approaches/ML/ML_regression/2_Statistics_analysis.ipynb
-about_resource: ./2_methodological_approaches/ML/ML_regression/1_Load_and_visualize_data.ipynb
-about_resource: ./2_methodological_approaches/ML/OWT_classification/Naive_bayesian_OWT_classification.ipynb
-about_resource: ./2_methodological_approaches/ML/S2_3_MDN/support_functions.py
-about_resource: ./2_methodological_approaches/ML/S2_3_MDN/Using_MDN_to_combine_S3_S3_chl_retrievals_in_coastal_waters.ipynb
-about_resource: ./2_methodological_approaches/ML/NN_C2RCC/Using_ML_to_retrieve_water_quality_indicators_in_coastal_waters.ipynb
-about_resource: ./2_methodological_approaches/ML/common_functions.py
-about_resource: ./2_methodological_approaches/Insitu_comparison/Ocean_colour_validation_cruise_tracks.ipynb
-about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/ESA_OTC_2025_cruise_track.geojson
-about_resource: ./2_methodological_approaches/Insitu_comparison/tracks/PS113_HPLC_pigments_PFTs_QCle30.tab
-about_resource: ./2_methodological_approaches/Insitu_comparison/templates/OCDB_template.sb
-about_resource: ./2_methodological_approaches/eocanvas/Multi_sensor_CHL_comparison_WEkEO.ipynb
-about_resource: ./2_methodological_approaches/eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L1B_subset_MphChl_reproject_eocanvas_template.xml
-about_resource: ./2_methodological_approaches/eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L2_subset_flag_reproject_chl_eocanvas_template.xml
-about_resource: ./img/S3_spectral_1200.png
-about_resource: ./img/4Fa_partition.png
-about_resource: ./img/S2_spectral_1200.png
-about_resource: ./img/C2RCC_NN_1.png
-about_resource: ./img/S3_spatial_resolution.png
-about_resource: ./img/C2RCC_NN_2.png
-about_resource: ./img/copernicus_logo.png
-about_resource: ./img/S2_spatial_resolution.png
-about_resource: ./img/SNAP_GUI_C2RCC.png
-about_resource: ./img/thumbs/ocean-colour-applications-default-thumb.png
-about_resource: ./img/thumbs/Ocean_colour_validation_cruise_tracks_thumb.png
-about_resource: ./img/thumbs/Multi_sensor_CHL_comparison_WEkEO_thumb.png
-
+about_resource: .gitignore
+about_resource: .gitmodules
 about_resource: AUTHORS.txt
+about_resource: CHANGELOG
+about_resource: CONTRIBUTING.md
 about_resource: Index.ipynb
 about_resource: LICENSE.txt
 about_resource: README.md
 about_resource: environment.yml
 about_resource: ocean-colour-applications.ABOUT
-about_resource: .gitmodules
-about_resource: .gitignore
+
+about_resource: 2_methodological_approaches/1_machine_learning/ML_regression
+about_resource: 2_methodological_approaches/1_machine_learning/NN_C2RCC
+about_resource: 2_methodological_approaches/1_machine_learning/OWT_classification
+about_resource: 2_methodological_approaches/1_machine_learning/S2_3_MDN
+about_resource: 2_methodological_approaches/1_machine_learning/common_functions.py <<<<!!!!!!!
+
+about_resource: 2_methodological_approaches/2_insitu_comparison/Ocean_colour_validation_cruise_tracks.ipynb
+about_resource: 2_methodological_approaches/2_insitu_comparison/tracks/ESA_OTC_2025_cruise_track.geojson
+about_resource: 2_methodological_approaches/2_insitu_comparison/tracks/PS113_HPLC_pigments_PFTs_QCle30.tab
+about_resource: 2_methodological_approaches/2_insitu_comparison/templates/OCDB_template.sb
+about_resource: 2_methodological_approaches/3_eocanvas/Multi_sensor_CHL_comparison_WEkEO.ipynb
+about_resource: 2_methodological_approaches/3_eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L1B_subset_MphChl_reproject_eocanvas_template.xml
+about_resource: 2_methodological_approaches/3_eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L2_subset_flag_reproject_chl_eocanvas_template.xml
+
+about_resource: 3_courses/msoc/AUTHORS.txt
+about_resource: 3_courses/msoc/benchmarking.md
+about_resource: 3_courses/msoc/CHANGELOG
+about_resource: 3_courses/msoc/CONTRIBUTING.md
+about_resource: 3_courses/msoc/Index.ipynb
+about_resource: 3_courses/msoc/README.md
+about_resource: 3_courses/msoc/test_my_code.ipynb
+about_resource: 3_courses/msoc/ac_methods/acolite_configs/acolite_config.ini
+about_resource: 3_courses/msoc/ac_methods/configure_ac_methods.sh
+about_resource: 3_courses/msoc/ac_methods/environment_ac.yml
+about_resource: 3_courses/msoc/ac_methods/run_ac_rr.sh
+about_resource: 3_courses/msoc/ac_methods/run_c2rcc_s2w.py
+about_resource: 3_courses/msoc/ac_methods/run_l2_conversion.sh
+about_resource: 3_courses/msoc/ac_methods/run_l2_netcdf.py
+about_resource: 3_courses/msoc/ac_methods/SNAP_graphs/GPT_config_template_netcdf_olci.xml
+about_resource: 3_courses/msoc/ac_methods/SNAP_graphs/GPT_config_template_c2rcc_msi.xml
+about_resource: 3_courses/msoc/ac_methods/SNAP_graphs/GPT_config_template_c2rcc_olci.xml
+about_resource: 3_courses/msoc/ac_methods/SNAP_graphs/GPT_config_template_resample_netcdf_msi.xml
+about_resource: 3_courses/msoc/ac_methods/SNAP_graphs/GPT_config_template_sen2water.xml
+about_resource: 3_courses/msoc/Day1/Access_MSI_CDSE.ipynb
+about_resource: 3_courses/msoc/Day1/Access_multisensor_CMEMS_Data_Store.ipynb
+about_resource: 3_courses/msoc/Day1/Access_OLCI_EUMETSAT_Data_Store.ipynb 
+about_resource: 3_courses/msoc/Day1/Access_PACE_EarthData.ipynb
+about_resource: 3_courses/msoc/Day2/AC_comparison.ipynb
+about_resource: 3_courses/msoc/Day2/Venice_OCDB_sanitised.csv
+about_resource: 3_courses/msoc/Day3/common_box.py
+about_resource: 3_courses/msoc/Day3/Comparing_BGC_IOP_products.ipynb
+about_resource: 3_courses/msoc/Day3/Oci_data_visualisation.ipynb
+about_resource: 3_courses/msoc/Day3/Running_GPiG.ipynb
+about_resource: 3_courses/msoc/Day3/ternary_diagram.py
+about_resource: 3_courses/msoc/Day4//msi_srf/*
+about_resource: 3_courses/msoc/Day4/Multisensor_product_comparison.ipynb
+about_resource: 3_courses/msoc/Day4/olci_srf/*
+about_resource: 3_courses/msoc/Day4/Resolution_synergy.ipynb
+about_resource: 3_courses/msoc/Day4/stats_tests.py
+about_resource: 3_courses/msoc/Day5/Match_up_analysis.ipynb
+about_resource: 3_courses/msoc/img/MSOC_banner.png
+about_resource: 3_courses/msoc/img/thumbs/Index_thumb.png
+about_resource: 3_courses/msoc/OC_sat_builder_game/*
+about_resource: 3_courses/msoc/ROIs/Region_01_red.pdf
+about_resource: 3_courses/msoc/ROIs/Region_02_green.pdf
+about_resource: 3_courses/msoc/ROIs/Region_03_blue.pdf
+about_resource: 3_courses/msoc/ROIs/Region_04_purple.pdf
+about_resource: 3_courses/msoc/ROIs/Region_05_yellow.pdf
+about_resource: 3_courses/msoc/ROIs/Region_06_white.pdf
+about_resource: 3_courses/msoc/tools/extract_forward_model_spectra.py
+about_resource: 3_courses/msoc/tools/profiler.py
+
+about_resource: img/C2RCC_NN_1.png
+about_resource: img/C2RCC_NN_2.png
+about_resource: img/Cruise_track.png
+about_resource: img/MSOC_banner.png
+about_resource: img/Partition.png
+about_resource: img/S2_spatial_resolution.png
+about_resource: img/S2_spectral_1200.png
+about_resource: img/S3_spatial_resolution.png
+about_resource: img/S3_spectral_1200.png
+about_resource: img/SNAP_GUI_C2RCC.png
+about_resource: img/copernicus_logo.png
+about_resource: img/thumbs/ <<<!!!!!!
 
 # Notes:
 
