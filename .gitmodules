@@ -38,3 +38,8 @@
 	url = https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/applications/ocean-case-studies.git
 	shallow = true
 	branch = main
+[submodule "learn-olci"]
+	path = learn-olci
+	url = https://gitlab.eumetsat.int/eumetlab/oceans/ocean-training/sensors/learn-olci.git
+	shallow = true
+	branch = main
