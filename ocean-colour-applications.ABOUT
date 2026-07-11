@@ -21,13 +21,11 @@ about_resource: LICENSE.txt
 about_resource: README.md
 about_resource: environment.yml
 about_resource: ocean-colour-applications.ABOUT
-
 about_resource: 2_methodological_approaches/1_machine_learning/ML_regression
 about_resource: 2_methodological_approaches/1_machine_learning/NN_C2RCC
 about_resource: 2_methodological_approaches/1_machine_learning/OWT_classification
 about_resource: 2_methodological_approaches/1_machine_learning/S2_3_MDN
 about_resource: 2_methodological_approaches/1_machine_learning/common_functions.py <<<<!!!!!!!
-
 about_resource: 2_methodological_approaches/2_insitu_comparison/Ocean_colour_validation_cruise_tracks.ipynb
 about_resource: 2_methodological_approaches/2_insitu_comparison/tracks/ESA_OTC_2025_cruise_track.geojson
 about_resource: 2_methodological_approaches/2_insitu_comparison/tracks/PS113_HPLC_pigments_PFTs_QCle30.tab
@@ -35,7 +33,10 @@ about_resource: 2_methodological_approaches/2_insitu_comparison/templates/OCDB_t
 about_resource: 2_methodological_approaches/3_eocanvas/Multi_sensor_CHL_comparison_WEkEO.ipynb
 about_resource: 2_methodological_approaches/3_eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L1B_subset_MphChl_reproject_eocanvas_template.xml
 about_resource: 2_methodological_approaches/3_eocanvas/SNAP_graphs/SNAP_GPT_graph_OLCI_L2_subset_flag_reproject_chl_eocanvas_template.xml
-
+about_resource: 3_courses/ioccg-sls/Index.ipynb
+about_resource: 3_courses/ioccg-sls/Practical_1_data_access/Copernicus_data_access.ipynb
+about_resource: 3_courses/ioccg-sls/Practical_2_exploring_OLCI_products/Exploring_OLCI_products.ipynb
+about_resource: 3_courses/ioccg-sls/Practical_3_match_up_analysis/Match_up_analysis.ipynb
 about_resource: 3_courses/msoc/AUTHORS.txt
 about_resource: 3_courses/msoc/benchmarking.md
 about_resource: 3_courses/msoc/CHANGELOG
@@ -83,11 +84,11 @@ about_resource: 3_courses/msoc/ROIs/Region_05_yellow.pdf
 about_resource: 3_courses/msoc/ROIs/Region_06_white.pdf
 about_resource: 3_courses/msoc/tools/extract_forward_model_spectra.py
 about_resource: 3_courses/msoc/tools/profiler.py
-
 about_resource: img/C2RCC_NN_1.png
 about_resource: img/C2RCC_NN_2.png
 about_resource: img/Cruise_track.png
 about_resource: img/MSOC_banner.png
+about_resource: img/IOCCG_SLS_banner.png
 about_resource: img/Partition.png
 about_resource: img/S2_spatial_resolution.png
 about_resource: img/S2_spectral_1200.png
