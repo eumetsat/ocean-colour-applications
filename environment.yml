@@ -37,7 +37,7 @@ dependencies:
   - conda-forge::cdsapi
   - conda-forge::earthaccess
   - conda-forge::ephem
-  - conda-forge::pandas=2.3.0
+  - conda-forge::pandas=2.3.3
   - conda-forge::urllib3
   - conda-forge::statsmodels
   # Extension: Unknown: everything below here is suspect!
